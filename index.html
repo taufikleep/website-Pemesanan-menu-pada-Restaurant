@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>Aplikasi Pemesanan Menu Restoran</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <i class="fas fa-utensils"></i>
+        <span>RestaurantHub</span>
+      </div>
+      <div class="nav-links">
+        <button onclick="showForm('makanan')" class="nav-btn">
+          <i class="fas fa-hamburger"></i>
+          <span>Menu Makanan</span>
+        </button>
+        <button onclick="showForm('minuman')" class="nav-btn">
+          <i class="fas fa-cocktail"></i>
+          <span>Menu Minuman</span>
+        </button>
+        <button onclick="showForm('pesanan')" class="nav-btn">
+          <i class="fas fa-receipt"></i>
+          <span>Pesanan</span>
+        </button>
+        <button onclick="showForm('pelanggan')" class="nav-btn">
+          <i class="fas fa-user"></i>
+          <span>Pelanggan</span>
+        </button>
+        <button onclick="showForm('kategori')" class="nav-btn">
+          <i class="fas fa-tags"></i>
+          <span>Kategori</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="header">
+        <h1>Sistem Pemesanan Restoran</h1>
+      </div>
+
+      <div class="content-wrapper">
+        <div id="makananForm" class="form-section card">
+          <h2><i class="fas fa-hamburger"></i> Data Menu Makanan</h2>
+          <br />
+          <form id="formMakanan">
+            <input type="hidden" id="makananId" />
+            <div class="form-group">
+              <label><i class="fas fa-tag"></i> Nama Makanan:</label>
+              <input type="text" id="namaMakanan" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-tags"></i> Kategori:</label>
+              <select id="kategoriMakanan" required></select>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-info-circle"></i> Deskripsi:</label>
+              <textarea id="deskripsi" required></textarea>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-money-bill"></i> Harga:</label>
+              <input type="number" id="harga" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-info-circle"></i> Status:</label>
+              <select id="statusMakanan" required>
+                <option value="Tersedia">Tersedia</option>
+                <option value="Habis">Habis</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-save"></i> Simpan Menu Makanan
+            </button>
+          </form>
+          <div id="makananList" class="list-container"></div>
+        </div>
+
+        <div id="minumanForm" class="form-section card" style="display: none">
+          <h2><i class="fas fa-cocktail"></i> Data Menu Minuman</h2>
+          <br />
+          <form id="formMinuman">
+            <input type="hidden" id="minumanId" />
+            <div class="form-group">
+              <label><i class="fas fa-tag"></i> Nama Minuman:</label>
+              <input type="text" id="namaMinuman" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-tags"></i> Kategori:</label>
+              <select id="kategoriMinuman" required></select>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-info-circle"></i> Deskripsi:</label>
+              <textarea id="deskripsiMinuman" required></textarea>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-money-bill"></i> Harga:</label>
+              <input type="number" id="hargaMinuman" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-info-circle"></i> Status:</label>
+              <select id="statusMinuman" required>
+                <option value="Tersedia">Tersedia</option>
+                <option value="Habis">Habis</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-save"></i> Simpan Menu Minuman
+            </button>
+          </form>
+          <div id="minumanList" class="list-container"></div>
+        </div>
+
+        <div id="pesananForm" class="form-section card" style="display: none">
+          <h2><i class="fas fa-receipt"></i> Data Pesanan</h2>
+          <br />
+          <form id="formPesanan">
+            <input type="hidden" id="pesananId" />
+            <div class="form-group">
+              <label><i class="fas fa-user"></i> Pelanggan:</label>
+              <select id="pelangganPesanan" required></select>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-hamburger"></i> Pilih Makanan:</label>
+              <select id="makananPesanan" multiple></select>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-cocktail"></i> Pilih Minuman:</label>
+              <select id="minumanPesanan" multiple></select>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-hashtag"></i> Jumlah Makanan:</label>
+              <input type="number" id="jumlahMakanan" min="1" default="1" />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-hashtag"></i> Jumlah Minuman:</label>
+              <input type="number" id="jumlahMinuman" min="1" default="1" />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-comment"></i> Catatan Khusus:</label>
+              <textarea id="catatanKhusus"></textarea>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-money-bill"></i> Total Harga:</label>
+              <input type="number" id="totalHarga" readonly />
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-save"></i> Simpan Pesanan
+            </button>
+          </form>
+          <div id="pesananList" class="list-container"></div>
+        </div>
+
+        <!-- Pelanggan and Kategori sections remain similar to previous version -->
+        <div id="pelangganForm" class="form-section card" style="display: none">
+          <h2><i class="fas fa-user"></i> Data Pelanggan</h2>
+          <br />
+          <form id="formPelanggan">
+            <input type="hidden" id="pelangganId" />
+            <div class="form-group">
+              <label><i class="fas fa-user"></i> Nama Pelanggan:</label>
+              <input type="text" id="namaPelanggan" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-phone"></i> No. Telepon:</label>
+              <input type="tel" id="noTelepon" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-envelope"></i> Email:</label>
+              <input type="email" id="email" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-map-marker-alt"></i> Alamat:</label>
+              <textarea id="alamat" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-save"></i> Simpan Pelanggan
+            </button>
+          </form>
+          <div id="pelangganList" class="list-container"></div>
+        </div>
+
+        <div id="kategoriForm" class="form-section card" style="display: none">
+          <h2><i class="fas fa-tags"></i> Kategori Menu</h2>
+          <br />
+          <form id="formKategori">
+            <input type="hidden" id="kategoriId" />
+            <div class="form-group">
+              <label><i class="fas fa-tag"></i> Nama Kategori:</label>
+              <input type="text" id="namaKategori" required />
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-info-circle"></i> Deskripsi:</label>
+              <textarea id="deskripsiKategori" required></textarea>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-utensils"></i> Tipe Kategori:</label>
+              <select id="tipeKategori" required>
+                <option value="Makanan">Makanan</option>
+                <option value="Minuman">Minuman</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-save"></i> Simpan Kategori
+            </button>
+          </form>
+          <div id="kategoriList" class="list-container"></div>
+        </div>
+      </div>
+    </div>
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
